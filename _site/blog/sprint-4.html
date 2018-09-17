@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+    <link rel="stylesheet" href="/assets/css/main.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+  </head>
+  <body>
+    <div class="wrapper main-content">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+      </nav>
+        
+<h1>Sprint 4 review</h1>
+  <p>Sprint 4 ended today, and tomorrow marks sprint 5.</p>
+
+<figure class="image">
+    
+    <a href="/assets/img/2016-03-09-sprint-4/sprint-4-burndown.png">
+        <img src="/assets/img/2016-03-09-sprint-4/sprint-4-burndown.png" alt="Sprint 4 burndown chart" />
+    </a>
+</figure>
+
+<p>I am quite happy with this sprint. I completed all the story points for this sprint, allowing me to do some other tasks such as training my handwriting etc.</p>
+
+<h3 id="what-i-actually-did">What I actually did</h3>
+<p>I completed the story “<em>As a user I want to be able to tag my notes so that all my notes are under the correct module.</em> “ Before I began this I had to think about the database design for this task - choosing appropriate relationships and names. After a lot of consideration of whether the image_path should be in its own relation, I decided to just leave it in the Note table. With introducing the database I had to refactor a lot of the system and change the flow of the application when the note was created. This task was done purely with TDD (and the red green refactor approach). An additional feature, which I thought was nice, was to check to see if the module code already exists in the database before creating and inserting a new record. This also required the form in the view file to be implemented, so a simple form with the module code field was created.</p>
+
+<p>I then moved onto, and completed, the story: “<em>As a user I want to be able to add information about the notes so that I can reference them in the future.</em>” This story was split down to 3 tasks: Saving the lecturers name, location and date of the lecture. This too resulted in a refactor of the existing model I made a day earlier. Some of you are probably thinking: “Are you mad Ryan, why didn’t you just do it in one go”. Well, I don’t work that way. It’s easier for me to focus on the small bit I need now, rather than the bigger picture as things may change. Anyway, the form was incrementally built, refactored and tested. During each phase of these tasks the output was also added to a view for a user to see the meta-data for the note. The date is parsed in such a format such as: “12th February 2016 15:00” - as that seemed a good format for the date. Overall, the user can now add all the meta-data they need for now to the system to be able to tag notes and add information about it - store it and view it.</p>
+
+<figure class="image">
+    
+    <a href="/assets/img/2016-03-09-sprint-4/database-example.png">
+        <img src="/assets/img/2016-03-09-sprint-4/database-example.png" alt="Example of database at sprint 4" />
+    </a>
+</figure>
+
+<p>After my meeting on Tuesday I decided to add the story “<em>As a developer I want to the website to have good styling</em>”. This was brought up because the mid-project demo was coming up so having it resembling a website would be useful. Basic styling was added - further design will be done in the future but a simple design has been added.</p>
+
+<p>Handwriting training has again been a part of this sprint. I was training on existing data when I had a lightbulb moment: “Let’s start the training again, but running all the examples through the new segmentation algorithm”. It seemed my lightbulb moment really began to work out - a lot of the text was being recognised and I thought I was making real progress, even the possibilities of integrating it with the application. However, today the recognition seems to have taken a backwards turn. The characters are “getting confused” and thinking characters are others and the output is getting less clear. This is slightly disheartening. However, it <strong>is</strong> still recognising characters to a good extent. I have found a main issue letters such as: g, y, j often prove to be difficult to identify. Nevertheless, I have created a stats file, which I will do a nice pretty graph showing some statistics of each iteration of training.</p>
+
+<p>Finally, I have dropped the binarisation script I was using, as it was spike work and coded it up proper (yay). Tests have been included and it’s been coded in a nice Object Oriented way - so I was glad to get that done :)</p>
+
+<h3 id="things-which-went-well">Things which went well</h3>
+<ul>
+  <li>Completed the sprint in plenty of time and to a good standard.</li>
+  <li>Got all the meta-data added to the form.</li>
+  <li>Added some style to make it look like a website</li>
+  <li>Good set of tests and followed the TDD principle well. Additionally, got a lot of the selenium end to end tests working, which is great for testing out if my application works.</li>
+  <li>Produced CRC cards for each of the stories and was disciplined in following them.</li>
+  <li>Database infrastructure is set up and is good enough.</li>
+</ul>
+
+<h3 id="things-which-did-not-go-so-well">Things which did not go so well</h3>
+<ul>
+  <li>Maybe less productive towards the end of the sprint.</li>
+</ul>
+
+<h3 id="things-which-i-intend-to-do-better-next-sprint">Things which I intend to do better next sprint</h3>
+<ul>
+  <li>Pomodoro’s - especially with handwriting training and bounding boxes. I think a lot of the disheartened feelings is spending lots of time looking at it and having no breaks.</li>
+  <li>Better error checking in the code.</li>
+</ul>
+
+<h3 id="what-to-do-this-sprint">What to do this sprint</h3>
+<p>Look into the calendar integration and using OAuth to integrate sensibly into the calendar. Pretty big one this and if I get this working by the end of the sprint, then I will be over the moon.</p>
+
+<p>Implement functionality for editing a note’s meta-data and deleting a note as these have now become user stories.</p>
+
+<p>Prepare for the mid-project demo on Monday and work out what to show them :).</p>
+
+<p>Continue to train the handwriting data too.</p>
+
+
+</div>
+</body>
+</html>

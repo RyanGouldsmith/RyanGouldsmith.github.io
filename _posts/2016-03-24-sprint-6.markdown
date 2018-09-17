@@ -1,0 +1,53 @@
+---
+layout: post
+title: Sprint 6 Review
+date: '2016-03-24 10:57:50'
+tags:
+- dissertation
+categories: dissertation
+---
+
+Sprint 6 is over and sprint 7 starts and it's been a lot better than sprint 5.
+{% include image.html file="sprint-6-burndown.png" description="Burndown for sprint 6" %}
+
+### What I actually did
+
+After sprint 5's overestimation I went back to the backlog and re-estimated user stories. I ended up renaming the story: "*As a developer I want to be able to get modules from a calendar*" to "*As a user I want to view a list of events on the homepage from my calendar, so I can see recent events*". As I thought a lot of the problems I felt I was having was the stories were encompassing too much and being too vague. 
+
+Additionally as part of this change in the way I estimate, I estimated to completed 26 story points this sprint. As I completed 33 in sprint 5, and did not complete another 8 then that seemed fine with the estimation of user stories. 
+
+After this I got onto some development. I began with working on displaying the calendar events from the last week to the homepage, once a user has authenticated. I created service objects for the google calendar to retrieve events from a start to end date. When coming to complete this story and display it to the homepage I had issues with testing, more specifically selenium and mocking. After getting stuck trying to think of a "nice" way to test this, I opted to just check the data response from the API after mocking the data. Eventually this story was completed and you can view the events from your calendar from the last 7 days on the homepage. 
+
+I implemented a part of the system to view all the notes in the application. This, again, was conducted using TDD. You can now view a bit of the meta-data and click to go through to the note and view it. 
+
+Another story I completed was to show the user's email address once they had authorised, instead of still displaying the click to authorise logo. This now parses the email address and displays that to the user on the homepage. 
+
+During the end of the last sprint I noticed I was missing the title for the note. This was an important bit of meta-data missing, so I rectified this. I created migration files and refactored **a lot** of the code base (mainly tests) to include this change. To complete this, I changed the add and edit form to show the title field. Finally, when showing the note it displays the title at the top of the page. 
+
+I also did additional bug fixes of the calendar date note formatting correctly for some dates. I am still not overly happy with it but I will have to do some user testing to see what they prefer. Finally, I fixed the issue of sometimes the google client would return an "RefreshAccessTokenException: invalid grant" - which is a nice way of saying, "your access token has expired, sort it out". I found an [ access token expired  method](https://developers.google.com/identity/protocols/OAuth2WebServer#example) in a google tutorial which will check to see if the credentials have expired and needs to regenerate. I implemented this into the application. 
+
+### Things which went well
+* Got the calendar integrated for the last week, so I know how to interact and build API queries. 
+* System feels a bit more fluid now I have view all notes and displaying welcoming messages. 
+* Completed work better with a little bit of slack for self reflection. 
+
+
+### Things which didn't go so well 
+* No handwriting training.
+
+### Things which I intend to do better next sprint
+* Pick up the pace a little bit.
+
+### What to do this sprint 
+
+Last sprint on the whole, was a good sprint, but it's time to knuckle down and get more done. 
+
+I will be looking to complete the search functionality for a note. This will allow a user to search for a note from a given module code and they will be able to find a list of notes for that note.
+
+I will be looking to add a note to a user, and doing so changing the search to search only for that user. This will make it a much more user-centric application. 
+
+I need to parse the exif data from the image to give a "clue" when the image was taken to help aid where to find the calendar event and aid the user in tagging the meta-data. This will be a big step with the application and will be closely approaching the "MVP". 
+
+### More things to think about
+* Look into whether Tesseract gives a confidence score, if so - output a colour to say how confident we are of the character. 
+* Sorting out the images so it aligns them automatically. 

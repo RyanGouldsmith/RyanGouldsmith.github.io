@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stuff</title>
+</head>
+<body>
+    <script src="three.min.js"></script>
+    <script>
+        /** Tutorial Suggestions from threejs.org*/
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        camera.position.z = 200;
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+        /* New Earth Mesh */      
+        var texture = new THREE.MeshBasicMaterial({
+            map: THREE.ImageUtils.loadTexture('earthmap1k.jpg')
+        });
+        /*New Moon Mesh */
+        var moontexture = new THREE.MeshBasicMaterial({
+            map: THREE.ImageUtils.loadTexture('moonmap1k.jpg')
+        });
+        var moonx =100;
+        var moony =20;
+        var moonz =10;
+        /* Create the Earth and Moon */
+        var sphere = new THREE.Mesh(new THREE.SphereGeometry(0, 20, 90), texture); 
+        var circle = new THREE.Mesh(new THREE.SphereGeometry(15, 30, 50), moontexture);
+        /*Change position of moon */
+        circle.position.set(moonx, moony, moonz);
+        /*Used so we can display them */
+        scene.add(sphere);
+        scene.add(circle);
+        var reached = false;
+        var render = function (){
+            setTimeout(function(){
+            requestAnimationFrame(render);  
+            circle.rotation.y +=0.14;
+            sphere.rotation.y +=0.25;
+            /*Checks maximum position reached */
+            if (!reached){
+                //moves the x value
+               moonx -= 3 + Math.sin(0 * Math.PI /180);
+                //if it gets to a certain value move back
+                if (moonx <= -101 && moony <= 20){
+                    reached = true;
+                }
+            } else if (reached){ 
+                //returns the other way
+                 moonx += 2 + Math.sin(0 * Math.PI /180);
+                if (moonz > 50 || moonx > 70){
+                    moonz -=4;
+                } else if (moonz <= 45) { 
+                    moonz +=8;
+                }
+                if (moonx >= 101 && moony >= 20){
+                    reached = false;
+                }
+            }
+                //set the new position of the moon
+            circle.position.set(moonx, moony, moonz);
+        
+            renderer.render(scene, camera);           
+            }, 1000/30);
+        }
+        render();
+    </script>
+    <p> Credit : <a href= "http://planetpixelemporium.com/earth.html for the free 1k resolution textures."> http://planetpixelemporium.com/earth.html</a> for the free 1k resolution textures. </p>
+</body>
+</html>

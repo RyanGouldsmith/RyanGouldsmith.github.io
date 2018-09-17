@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+    <link rel="stylesheet" href="/assets/css/main.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+  </head>
+  <body>
+    <div class="wrapper main-content">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+      </nav>
+        
+<h1>Sprint 9 Review</h1>
+  <p>Today I start Sprint 10 - finishing Sprint 9. This sprint has felt like a mixed bag really.</p>
+
+<figure class="image">
+    
+    <a href="/assets/img/2016-04-14-sprint-9-review/sprint-9-burndown.png">
+        <img src="/assets/img/2016-04-14-sprint-9-review/sprint-9-burndown.png" alt="Sprint 9 review" />
+    </a>
+</figure>
+
+<p>As I am in the tidying up process I only estimated 18 story points which I completed rather quickly.</p>
+
+<h3 id="what-i-actually-did">What I actually did</h3>
+<p>The main aim of the sprint was to complete the edit functionality with the calendar. It would work in such a way, that if you edited the calendar it would remove old description events and add it to a new event if found in the calendar.</p>
+
+<h4 id="edit-calendar-items">Edit Calendar items</h4>
+<p>The story “<em>As a user I want to be able to edit the date and update my calendar</em>” was created due to a meeting with my supervisor who suggested that when the user edits and updates their note meta-data then it would reflect that in the calendar entry. In simpler terms: I needed to be able to remove event description from one event and plonk it in a new event, if it exists.</p>
+
+<p>The Google Calendar is slowly becoming the bane of my life. Initially I was just replacing it with an empty string. However, I discovered that this would be terrible if some useful information was placed in the description field. This was refactored and changed to do a find and replace as well as an append to the end of the event description.</p>
+
+<h4 id="tesseract-helpers">Tesseract helpers</h4>
+<p>A user interface and user experience feature was developed under the story: “<em>As a user I want to be able to click Tesseract Items, so that it’s easier for me to put in the fields.</em>”. This was suggested after some pre-beta over the shoulder looking from my supervisor and my peers.</p>
+
+<p>Now the divs are clickable and it will populate the text-fields on click. This was quite simple to do with a bit of jQuery. Additionally, I added some functionality to check to make sure that the tesseract variables are valid before letting you click on them.</p>
+
+<h4 id="refactoring">Refactoring</h4>
+<p>I did a lot of refactoring on the system. With the functionality for the edit calendar being introduced it meant that in a lot of places I was writing lines and lines of code which did the same functionality - this is not good for the DRY(do not repeat yourself) ideology. As a result I spent over 2 days refactoring the code back to be as clean and readable as possible. I introduced a series of helper classes and service classes where appropriate.</p>
+
+<p>The system is a lot more readable now and I have tried to reduce the amount of similar function calls as possible.</p>
+
+<h4 id="other-things">Other things</h4>
+<p>I worked on the report, getting a good headway into the background chapter; analysis was conducted on OneNote, Google Keep and EverNote for comparisons of similar related systems.</p>
+
+<p>On Thursday, during the group meeting, I tried to do a “user study” but, naturally with any demonstration, the application decided to break. Interestingly, I found some use-cases I had not considered, so not all was lost; when parsing an event from Google I had not considered all day events - and these do not have a dateTime field.</p>
+
+<p>Additionally there was an issue with the tesseract and parsing the lines of text throwing an index out of bounds exception. This has now been caught and tested.</p>
+
+<p>One thing I have noticed this morning was reoccurring events being a pain. When you make a request to the service it only gives you the time it was first created. So when I got an event saying 20th February, when it was supposed to get an event from the 12th April then I was naturally super confused. This will be fixed ASAP.</p>
+
+<p>Additionally, I have CSRF support added to the application and ready to merge in.</p>
+
+<h3 id="things-which-went-well">Things which went well</h3>
+<ul>
+  <li>There’s now a nicely engineered system.</li>
+  <li>TDD to test the application.</li>
+</ul>
+
+<h3 id="things-which-didnt-go-so-well">Things which didn’t go so well</h3>
+<ul>
+  <li>The demonstration, due to issues I had not considered.</li>
+</ul>
+
+<h3 id="things-which-i-intend-to-do-better-next-sprint">Things which I intend to do better next sprint</h3>
+<ul>
+  <li>Be able to demonstrate the application.</li>
+</ul>
+
+<h3 id="what-to-do-this-sprint">What to do this sprint</h3>
+<ul>
+  <li>I need to fix this reoccurring event issue ASAP. So I will be working on that.</li>
+  <li>I need to pick up the pace on the report and get at least the design section written by the end of the next sprint.</li>
+</ul>
+
+<p>The sprints have slowed down a bit and I need to think in a way to do the user story points for the coming tasks, especially with the report. I am not entirely sure how they’re going to work, but I will see.</p>
+
+
+</div>
+</body>
+</html>

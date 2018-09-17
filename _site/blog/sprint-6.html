@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+    <link rel="stylesheet" href="/assets/css/main.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+  </head>
+  <body>
+    <div class="wrapper main-content">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+      </nav>
+        
+<h1>Sprint 6 Review</h1>
+  <p>Sprint 6 is over and sprint 7 starts and it’s been a lot better than sprint 5.</p>
+<figure class="image">
+    
+    <a href="/assets/img/2016-03-24-sprint-6/sprint-6-burndown.png">
+        <img src="/assets/img/2016-03-24-sprint-6/sprint-6-burndown.png" alt="Burndown for sprint 6" />
+    </a>
+</figure>
+
+<h3 id="what-i-actually-did">What I actually did</h3>
+
+<p>After sprint 5’s overestimation I went back to the backlog and re-estimated user stories. I ended up renaming the story: “<em>As a developer I want to be able to get modules from a calendar</em>” to “<em>As a user I want to view a list of events on the homepage from my calendar, so I can see recent events</em>”. As I thought a lot of the problems I felt I was having was the stories were encompassing too much and being too vague.</p>
+
+<p>Additionally as part of this change in the way I estimate, I estimated to completed 26 story points this sprint. As I completed 33 in sprint 5, and did not complete another 8 then that seemed fine with the estimation of user stories.</p>
+
+<p>After this I got onto some development. I began with working on displaying the calendar events from the last week to the homepage, once a user has authenticated. I created service objects for the google calendar to retrieve events from a start to end date. When coming to complete this story and display it to the homepage I had issues with testing, more specifically selenium and mocking. After getting stuck trying to think of a “nice” way to test this, I opted to just check the data response from the API after mocking the data. Eventually this story was completed and you can view the events from your calendar from the last 7 days on the homepage.</p>
+
+<p>I implemented a part of the system to view all the notes in the application. This, again, was conducted using TDD. You can now view a bit of the meta-data and click to go through to the note and view it.</p>
+
+<p>Another story I completed was to show the user’s email address once they had authorised, instead of still displaying the click to authorise logo. This now parses the email address and displays that to the user on the homepage.</p>
+
+<p>During the end of the last sprint I noticed I was missing the title for the note. This was an important bit of meta-data missing, so I rectified this. I created migration files and refactored <strong>a lot</strong> of the code base (mainly tests) to include this change. To complete this, I changed the add and edit form to show the title field. Finally, when showing the note it displays the title at the top of the page.</p>
+
+<p>I also did additional bug fixes of the calendar date note formatting correctly for some dates. I am still not overly happy with it but I will have to do some user testing to see what they prefer. Finally, I fixed the issue of sometimes the google client would return an “RefreshAccessTokenException: invalid grant” - which is a nice way of saying, “your access token has expired, sort it out”. I found an <a href="https://developers.google.com/identity/protocols/OAuth2WebServer#example"> access token expired  method</a> in a google tutorial which will check to see if the credentials have expired and needs to regenerate. I implemented this into the application.</p>
+
+<h3 id="things-which-went-well">Things which went well</h3>
+<ul>
+  <li>Got the calendar integrated for the last week, so I know how to interact and build API queries.</li>
+  <li>System feels a bit more fluid now I have view all notes and displaying welcoming messages.</li>
+  <li>Completed work better with a little bit of slack for self reflection.</li>
+</ul>
+
+<h3 id="things-which-didnt-go-so-well">Things which didn’t go so well</h3>
+<ul>
+  <li>No handwriting training.</li>
+</ul>
+
+<h3 id="things-which-i-intend-to-do-better-next-sprint">Things which I intend to do better next sprint</h3>
+<ul>
+  <li>Pick up the pace a little bit.</li>
+</ul>
+
+<h3 id="what-to-do-this-sprint">What to do this sprint</h3>
+
+<p>Last sprint on the whole, was a good sprint, but it’s time to knuckle down and get more done.</p>
+
+<p>I will be looking to complete the search functionality for a note. This will allow a user to search for a note from a given module code and they will be able to find a list of notes for that note.</p>
+
+<p>I will be looking to add a note to a user, and doing so changing the search to search only for that user. This will make it a much more user-centric application.</p>
+
+<p>I need to parse the exif data from the image to give a “clue” when the image was taken to help aid where to find the calendar event and aid the user in tagging the meta-data. This will be a big step with the application and will be closely approaching the “MVP”.</p>
+
+<h3 id="more-things-to-think-about">More things to think about</h3>
+<ul>
+  <li>Look into whether Tesseract gives a confidence score, if so - output a colour to say how confident we are of the character.</li>
+  <li>Sorting out the images so it aligns them automatically.</li>
+</ul>
+
+</div>
+</body>
+</html>

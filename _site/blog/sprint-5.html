@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+    <link rel="stylesheet" href="/assets/css/main.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+  </head>
+  <body>
+    <div class="wrapper main-content">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+      </nav>
+        
+<h1>Sprint 5 Review</h1>
+  <p>Yesterday was the end of sprint 5 and today starts the sprint 6. The burndown chart shows I only completed 76% of the work this sprint, which was not good enough really.</p>
+
+<figure class="image">
+    
+    <a href="/assets/img/2016-03-17-sprint-5/sprint-5-burndown.png">
+        <img src="/assets/img/2016-03-17-sprint-5/sprint-5-burndown.png" alt="Burndown chart Sprint 5" />
+    </a>
+</figure>
+
+<h3 id="what-i-actually-did">What I actually did</h3>
+<p>This week started off by some good spike work with OAuth and the Google API. I looked at how to build queries, authenticate and get some data from a user. This put me in a good place to go forward and know what queries I needed.</p>
+
+<p>Naturally, this got scrapped because it was not suitable code for the application and it had no background tests. I ended up coding some tests but soon came up with a gut wrenching moment: everything which I have done with the Google API so far is kind of pointless. When authenticating an app with Google services it returns a <code> client_secrets.json </code> file which you have to guard with your life (read: do not put under version control). The tests I was writing used this client secrets file so when I pushed to travis the builds would obviously break because it can not find the file. This put me back about half a day or so because I needed to find a way to actually to mock/stub the data responses.</p>
+
+<p>Since there’s no documentation for mocking the requests for OAuth, I had to look at the tests for the client library I am using from Google. From their tests it showed how mocking could be done. Eventually, I managed to get some mocks working and returning dummy data to authorise requests.</p>
+
+<p>After this I discovered that I needed to get the user’s email address once they had finished the authentication process. I found that I had to integrate with the Google+ api. A User’s table has been created with just an email field so we can store the email address in the field once they have authorised.</p>
+
+<p>So a lot of the week was spent playing around with that. It was mainly testing which held me back, which is the only time in which TDD I feel has made my progress slower - however, I am not too concerned as I have a good set of tests now and I would rather have that than no tests.</p>
+
+<p>So assessing I would not complete the Google Calendar integration I decided to complete the stories: “<em>As a user I want to be able to edit the meta data, so that I can update it in light of a change</em>” and “<em>As a user I want to be able to remove a note incase I do not want it to appear</em>”.</p>
+
+<p>The deletion of a note was simple enough and took no time to do. However,  the edit meta data took longer than I wanted. On the burndown chart it was the plateau. For some reason this task took longer to complete than it should have done. I believe I underestimated, for a start. I gave the story card a 5 but realistically it was a lot more complicated and probably a 13. I am going to assess this sprint complexity of remaining story cards and see where to go from there.</p>
+
+<h3 id="things-which-went-well">Things which went well</h3>
+<ul>
+  <li>Got deletion of a note and editing meta-data working so a more rounded system.</li>
+  <li>Got the OAuth working and a good understanding of how to do the rest.</li>
+  <li>Got user’s implemented in the system now.</li>
+  <li>Had a mid-project demo.</li>
+  <li>Stuck to TDD even when the times got tough.</li>
+</ul>
+
+<h3 id="things-which-did-not-go-so-well">Things which did not go so well</h3>
+<ul>
+  <li>Did not complete all story cards.</li>
+  <li>Had a few days where progress was painfully slow, tired and other assignments maybe?</li>
+  <li>Lost a little confidence in my estimation.</li>
+</ul>
+
+<h3 id="things-which-i-intend-to-do-better-next-sprint">Things which I intend to do better next sprint</h3>
+<ul>
+  <li>Assess story points.</li>
+</ul>
+
+<h3 id="what-to-do-this-sprint">What to do this sprint</h3>
+<p>First off I will be assessing the remaining story points and looking at any blockers and really begin to analyse what happened. I will be rectifying these points in light of the new change, so I don’t have a sprint again like last sprint.</p>
+
+<p>Then I will be looking at integrating the Google calendar API into the application but maybe not saving to a calendar just showing the list of events.</p>
+
+<p>I want to implement the functionality of viewing all the notes in the application.</p>
+
+<h3 id="an-aside-from-the-meeting">An aside from the meeting</h3>
+<p>I have to write my report (20,000 words max) and one of the key aims to assess where it can go next. Now as I am completing the work fairly well, I will be looking into additional functionality for the application:</p>
+
+<ul>
+  <li>I might change from PostgreSQL to MongoDB to make the note application more abstract and not just for lecture notes.</li>
+  <li>Looking into autocropping images when uploaded.</li>
+</ul>
+
+<p>These are all pipeline stuff, but I can dream right :)</p>
+
+</div>
+</body>
+</html>

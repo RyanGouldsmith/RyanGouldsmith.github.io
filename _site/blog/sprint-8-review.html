@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+    <link rel="stylesheet" href="/assets/css/main.css?v=4ca28d577d1281c3c9d086632a4fc9d955f52b7f">
+  </head>
+  <body>
+    <div class="wrapper main-content">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+      </nav>
+        
+<h1>Sprint 8 Review</h1>
+  <p>Sprint 8 has been completed and it has not really been like the other sprints. As I feel I am approaching the end of the project, I have been completing issues I have come across so not as many story points have been included.</p>
+
+<figure class="image">
+    
+    <a href="/assets/img/2016-04-07-sprint-8-review/sprint-8-burndown.png">
+        <img src="/assets/img/2016-04-07-sprint-8-review/sprint-8-burndown.png" alt="Burndown chart sprint 8" />
+    </a>
+</figure>
+
+<p>I completed most of the work in the beginning of the sprint, then turned some of the tasks to stories as they were too large and did a mid-sprint quick plan on those items.</p>
+
+<h3 id="what-i-actually-did">What I actually did</h3>
+<p>The main aim for this sprint was to include Tesseract into the web app. This really does tie up the application and make it a valid bit of software for an end user.</p>
+
+<h4 id="tesseract-integration">Tesseract Integration</h4>
+<p>With the initial epic-story of just been “integrate Tesseract into the system” I thought that was far too big of a task to estimate to complete. As a result I split the epic-story down into two stories: “<em>As a user, I want to be able to have automated suggestion of meta data from the image, so that I can know what to tag.</em>” and “<em>As a developer I want to integrate tesseract into the application, so it can read information from a note</em>”. This gave me the clear distinction of actually getting Tesseract to work within the application and the other story for displaying content to the user.</p>
+
+<p>One of the first things to do this sprint was to implement the pre-processing script which I made to binarise the image. This was implemented into the upload route so that it converts the image to a tiff file, before running the Tesseract from it.</p>
+
+<p>I discovered that the Tesseract command line does not give you the ability to get the confidence scores directly; the C++ API does give you that functionality, however.</p>
+
+<p>This ruled out writing my own wrapper for the tool without using the C++ library. However, I found this awesome library which would output the confidence score for each word identified. I investigated the <a href="https://github.com/sirfz/tesserocr">tesserocr library</a> and found that this was suitable. Other libraries were available but they offered basic functionality for Tesseract and not outputting the confidence scores I wanted.</p>
+
+<p>I integrated this library into the application, and immediately thought of an issue: I need to constrain the notes so that they’re consistent every time. Therefore it was decided that the first 3 lines of the image were to be the module code: title, date and lecturer. This would be the meta-data parsed from the image.</p>
+
+<p>After collecting the confidence score, I created a threshold for the values and returned whether they should be green, orange or red. The colour of the text indicates how confident Tesseract is that it’s the word it’s detected. This now resulted in Tesseract being fully included in the system, with colour codings on word confidence.</p>
+
+<figure class="image">
+    
+    <a href="/assets/img/2016-04-07-sprint-8-review/tesseract-confidence-output.png">
+        <img src="/assets/img/2016-04-07-sprint-8-review/tesseract-confidence-output.png" alt="Confidence Tesseract Output" />
+    </a>
+</figure>
+<h4 id="logout-functionality">Logout functionality</h4>
+<p>One aspect of the system I found that I was missing was a logout functionality. I had the sign in with Google sorted, but no sign-out. This was amended when I added a logout route and checking if the user id is in the session. If this route is hit then it will remove the user id and all of google credentials and they would have to tart again.</p>
+
+<h4 id="fixing-things">Fixing things</h4>
+<p>I had to fix an issue with the timezone from a calendar event. Originally, I thought the issue was the comparison of the event summary when comparing module codes - but investigation showed that it was a timezone issue. This has now been fixed.</p>
+
+<p>I added some user experience features such as a datepicker and a timepicker. The default jQuery datepicker was used and a <a href="http://jonthornton.github.io/jquery-timepicker/">this timepicker</a> was used. It required a large modification of all the tests and routing.</p>
+
+<p>A series of validation was added on both the client and server side when interacting with the form. HTML5 required fields were used and having previously used the pattern attribute, I went and tried to create a REGEX to avoid empty spaces in the input box. On the server side error catching was implemented and then sent to the user on the page to show any errors; the system feels a lot more robust now I have added these checks.</p>
+
+<p>Fixed an issue of every time a user logged in it would create a new user row - which is wrong. I added find or create functionality so now the user logging in with the same google email address will see their same notes.</p>
+
+<p>Along with the log out route I fixed the invalid grant that than happen when the token expires in the session and that is used to try and connect to Google. This has happened a couple of times so this has now been fixed.</p>
+
+<p>Finally, I have redesigned the website gave it all consistent stylings and made the information more accessible and easier to see. Additionally, it should be responsive now too.</p>
+
+<figure class="image">
+    
+    <a href="/assets/img/2016-04-07-sprint-8-review/tesseract-confidence-ui.png">
+        <img src="/assets/img/2016-04-07-sprint-8-review/tesseract-confidence-ui.png" alt="Redesign of Tesseract confidence " />
+    </a>
+</figure>
+<figure class="image">
+    
+    <a href="/assets/img/2016-04-07-sprint-8-review/events-calendar.png">
+        <img src="/assets/img/2016-04-07-sprint-8-review/events-calendar.png" alt="Redesign of App" />
+    </a>
+</figure>
+
+<h3 id="things-which-went-well">Things which went well</h3>
+<ul>
+  <li>Got a lot of the little bits which make the system better as a whole done.</li>
+  <li>Stuck to TDD well this sprint.</li>
+  <li>Happy to have almost finished MVP.</li>
+</ul>
+
+<h3 id="things-which-didnt-go-so-well">Things which didn’t go so well</h3>
+<ul>
+  <li>Refactoring: Although TDD has been practiced I think on a couple of occasions I could have refactored it better.</li>
+  <li>Travis CI build time is now high</li>
+</ul>
+
+<h3 id="things-which-i-intend-to-do-better-next-sprint">Things which I intend to do better next sprint</h3>
+<ul>
+  <li>More merciless refactoring.</li>
+</ul>
+
+<h3 id="what-to-do-this-sprint">What to do this sprint</h3>
+<p>From some pre-beta comments from both my supervisor and a couple of peers, I will be implementing a click on the tesseract information and it will populate the text boxes for you automatically.</p>
+
+<p>I will also be looking at when you edit the meta-data it will update the calendar item and put the new item in the updated date’s calendar item.</p>
+
+<p>Then more of the report :)</p>
+
+</div>
+</body>
+</html>
